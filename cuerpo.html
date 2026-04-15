@@ -1,0 +1,143 @@
+cuerpo
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUNCH - FJ BEAST & N|KØ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a class="nav-logo" onclick="showSection('inicio')">HUNCH <span>LP</span></a>
+        <ul class="nav-links">
+            <li><a onclick="showSection('inicio')">Inicio</a></li>
+            <li><a onclick="showSection('musica')">Música</a></li>
+            <li><a onclick="showSection('artistas')">Artistas</a></li>
+            <li><a onclick="showSection('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div id="section-inicio" class="hero">
+        <p style="letter-spacing: 8px; color: var(--text-secondary); font-weight: 300;">ESTUDIO CREATIVO</p>
+        <h1>FJ BEAST & N|KØ</h1>
+        <button class="btn" style="width: auto; padding: 0 40px; border-radius: 30px; margin: 30px auto;" onclick="showSection('musica')">ENTRAR AL REPRODUCTOR</button>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <img src="caratula.jpeg" alt="Producción">
+                <h3>Producción Musical</h3>
+                <p>FJ BEAST y N|KØ combinan ritmos urbanos con texturas electrónicas, creando un sonido único bajo el sello HUNCH.</p>
+            </div>
+            <div class="info-card">
+                <img src="vape 2.png" alt="Diseño" style="object-fit: contain; background: #000;">
+                <h3>Identidad Visual</h3>
+                <p>No solo es música, es una experiencia visual. Diseñamos cada arte para reflejar la esencia de cada track.</p>
+            </div>
+            <div class="info-card">
+                <img src="caratula.jpeg" alt="Lanzamientos">
+                <h3>HUNCH LP</h3>
+                <p>Explora nuestro último proyecto discográfico con colaboraciones exclusivas y sonidos de vanguardia.</p>
+            </div>
+        </div>
+
+        <div id="beats-marketplace" style="padding: 50px 0 150px; text-align: center;">
+            <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -1px;">
+                BEATS <span style="color: var(--accent);">DISPONIBLES</span>
+            </h2>
+            
+            <div class="info-grid" style="padding: 0 50px;">
+                <div class="info-card">
+                    <span class="price-tag">$29.99</span>
+                    <img src="caratula.jpeg" alt="Beat 1">
+                    <h3>TRAP SOUL TYPE</h3>
+                    <p>Estilo melódico inspirado en Drake. Ideal para R&B o Trap suave.</p>
+                    <button class="btn" onclick="buyBeat('TRAP SOUL TYPE', '29.99')" style="width: 100%; border-radius: 10px; margin-top: 15px; font-weight: 700; height: 50px;">COMPRAR</button>
+                </div>
+
+                <div class="info-card">
+                    <span class="price-tag">$34.99</span>
+                    <img src="tienda 2.jpg" alt="Beat 2">
+                    <h3>BACHATA URBANA</h3>
+                    <p>Fusión tropical con bajos modernos. El sonido de la calle y el sentimiento.</p>
+                    <button class="btn" onclick="buyBeat('BACHATA URBANA', '34.99')" style="width: 100%; border-radius: 10px; margin-top: 15px; font-weight: 700; height: 50px;">COMPRAR</button>
+                </div>
+
+                <div class="info-card">
+                    <span class="price-tag">$24.99</span>
+                    <img src="tienda 1.jpg" alt="Beat 3">
+                    <h3>DRILL DARK</h3>
+                    <p>Atmósfera pesada y agresiva. Diseñado para barras de alto impacto.</p>
+                    <button class="btn" onclick="buyBeat('DRILL DARK', '24.99')" style="width: 100%; border-radius: 10px; margin-top: 15px; font-weight: 700; height: 50px;">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay-musica" class="overlay">
+        <span class="close-btn" onclick="showSection('inicio')">×</span>
+        <div id="capture-area">
+            <div style="width: 280px; border-right: 1px solid var(--glass-border); padding-right: 30px; text-align: left;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px;">
+                    <img src="LOGO NIKO 2.png" height="35" style="opacity:0.9; filter: invert(1);">
+                    <img src="vape 2.png" height="60" style="filter: drop-shadow(0 0 15px var(--accent));">
+                    <img src="FJ BEAST LOGO.png" height="35" style="opacity:0.9; filter: invert(1);">
+                </div>
+                <div style="font-size: 0.65rem; font-weight: 900; letter-spacing: 4px; color: var(--accent); margin-bottom: 15px;">PLAYLIST</div>
+                <ul class="track-list" id="track-list-ui"></ul>
+            </div>
+            <div class="main-visual">
+                <div class="scene">
+                    <div class="cover" id="album-cover"></div>
+                    <div class="vinyl" id="vinyl-disk">
+                        <div style="width: 35%; height: 35%; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); background: center/cover;" id="vinyl-label"></div>
+                    </div>
+                </div>
+                <div style="width: 280px; text-align: center;">
+                    <h1 id="active-track-name" style="font-size: 1.2rem; text-transform: uppercase; margin: 0; min-height: 1.5em;">---</h1>
+                    <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden;">
+                        <div id="progress-bar" style="height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear;"></div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn" id="prev-btn">◀</button>
+                        <button class="btn" id="play-btn" style="font-size: 1.2rem;">▶</button>
+                        <button class="btn" id="next-btn">▶</button>
+                        <input type="range" id="volume-slider" min="0" max="100" value="80">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay-artistas" class="overlay">
+        <span class="close-btn" onclick="showSection('inicio')">×</span>
+        <div class="artist-container">
+            <div class="artist-profile">
+                <img src="FJ BEAST LOGO.png" style="filter: invert(1);">
+                <h2 style="margin: 0;">FJ BEAST</h2>
+                <span style="color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">PRODUCER / DJ</span>
+            </div>
+            <div class="artist-profile">
+                <img src="LOGO NIKO 2.png" style="filter: invert(1);">
+                <h2 style="margin: 0;">N|KØ</h2>
+                <span style="color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">ARTIST / SINGER</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay-contacto" class="overlay">
+        <span class="close-btn" onclick="showSection('inicio')">×</span>
+        <div class="contact-card">
+            <h2 style="font-size: 2.5rem; font-weight: 900; margin-top: 0;">¿LISTO PARA <span style="color: var(--accent);">CREAR?</span></h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Hablemos sobre tu próximo proyecto musical o visual.</p>
+            <a href="mailto:djdominican9@gmail.com" class="contact-link">Enviar Email</a>
+            <a href="https://www.youtube.com/@fjbeastrd" target="_blank" class="contact-link">Canal de YouTube</a>
+        </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+
+    <script src="funcines.js"></script>
+</body>
+</html>
